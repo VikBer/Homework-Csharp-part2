@@ -1,10 +1,60 @@
 ﻿/*
- Это ветка Master. Она используется как список решенных в данном файле задач. Для переключения между задачами используйте
-их названия, указанные ниже, или при помощи переключения веток на GitHub
-    
-        6. Задачи первого семинара:
-git checkout Lesson6task41 - Задача 41. Пользователь вводит с клавиатуры M чисел. 
-                                        Посчитайте, сколько чисел больше 0 ввёл пользователь.
 git checkout Lesson6task43 - Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
                                         заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
                                         значения b1, k1, b2 и k2 задаются пользователем.
+
+b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
+
+k1 * x + b1 = k2 * x + b2
+k1 * x - k2 * x = b2 - b1
+x * (k1 - k2) = b2 - b1
+
+ 
+*/
+
+Console.Clear();
+
+double[,] coefficients = new double[2, 2];
+double[] crossPoint = new double[2];
+
+void InputCoefficients()
+{
+  for (int i = 0; i < coefficients.GetLength(0); i++)
+  {
+    Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
+    for (int j = 0; j < coefficients.GetLength(1); j++)
+    {
+      if(j==0) Console.Write($"Введите коэффициент k: ");
+      else Console.Write($"Введите коэффициент b: ");
+      coefficients[i,j] = Convert.ToInt32(Console.ReadLine());
+    }
+  }
+}
+
+double[] Decision(double[,] coeff)
+{
+  crossPoint[0] = (coeff[1,1] - coeff[0,1]) / (coeff[0,0] - coeff[1,0]);
+  crossPoint[1] = crossPoint[0] * coeff[0,0] + coeff[0,1];
+  return crossPoint;
+}
+
+void OutputResponse(double[,] coeff)
+{
+  if (coeff[0,0] == coeff[1,0] && coeff[0,1] == coeff[1,1]) 
+  {
+    Console.Write($"\nПрямые совпадают");
+  }
+  else if (coeff[0,0] == coeff[1,0] && coeff[0,1] != coeff[1,1]) 
+  {
+    Console.Write($"\nПрямые параллельны");
+  }
+  else 
+  {
+    Decision(coeff);
+    Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
+  }
+}
+
+InputCoefficients();
+OutputResponse(coefficients);
+
