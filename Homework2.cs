@@ -1,20 +1,50 @@
 ﻿/*
-        Это ветка Master. Она используется как список решенных в данном файле задач. Для переключения между задачами используйте
-их названия, указанные ниже, или при помощи переключения веток на GitHub
-       
-        6. Задачи шестого (6) семинара:
-git checkout Lesson6task41 - Задача 41. Пользователь вводит с клавиатуры M чисел. 
-                                        Посчитайте, сколько чисел больше 0 ввёл пользователь.
-git checkout Lesson6task43 - Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-                                        заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
-                                        значения b1, k1, b2 и k2 задаются пользователем.
-
         7. Задачи седьмого (7) семинара:
 git checkout Lesson7task47 - Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
 
-git checkout Lesson7task50 - Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
-                                         и возвращает значение этого элемента или же указание, что такого элемента нет.
+0,5 7 -2 -0,2
+1 -3,3 8 -9,9
+8 7,8 -7,1 9
 
-git checkout Lesson7task52 - Задача 52. Задайте двумерный массив из целых чисел.
-                                        Найдите среднее арифметическое элементов в каждом столбце.
 */
+Console.Clear();
+
+Console.WriteLine("Введите количество строк массива");
+int m =  int.Parse(Console.ReadLine()!);
+Console.WriteLine("Введите количество столбцов массива");
+int n =  int.Parse(Console.ReadLine()!);
+
+Console.WriteLine("Введите значение минимального элемента диапазона для создания массива");
+int min =  int.Parse(Console.ReadLine()!);
+
+Console.WriteLine("Введите значение максимального элемента диапазона для создания массива");
+int max =  int.Parse(Console.ReadLine()!);
+
+double[,] array = new double[m,n];
+
+void  FillArray (double[,] arr)
+{
+        for (int i = 0; i < arr.GetLength(0); i++)
+       {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                        arr[i,j] = Math.Round( new Random().NextDouble() + new Random().Next(min, max), 2);
+                }
+       }
+}
+
+void PrintArray (double[,] arr)
+{
+        for (int i = 0; i < arr.GetLength(0); i++)
+       {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                  Console.Write($"{array[i,j]} ");
+                }
+         Console.Write($"\n");
+       }
+       
+}
+
+FillArray(array);
+PrintArray(array);
