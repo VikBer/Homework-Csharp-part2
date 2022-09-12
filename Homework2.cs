@@ -39,18 +39,20 @@ int[,] SortArray(int[,] arr)
 {
     for (int i = 0; i < arr.GetLength(0); i++)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (int count = 0; count < arr.GetLength(1); count++)
         {
-            int temp = 0;
-            if (arr[i,j] < arr[i,j+1])
+            for (int j = 0; j < arr.GetLength(1) - 1; j++)
             {
-                temp = arr[i,j];
-                arr[i,j] = arr[i,j+1];
-                arr[i,j+1] = temp;
+                int temp = 0;
+                if (arr[i, j] < arr[i, j + 1])
+                {
+                    temp = arr[i, j + 1];
+                    arr[i, j + 1] = arr[i, j];
+                    arr[i, j] = temp;
+                }
             }
-
         }
-        }
+    }
     return arr;
 }
 
