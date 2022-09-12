@@ -33,21 +33,37 @@ FillArray(alphaArray);
 
 Console.Write("\n");
 
+int[,] betaArray = alphaArray;
+
 int[,] SortArray(int[,] arr)
 {
     for (int i = 0; i < arr.GetLength(0); i++)
     {
         for (int j = 0; j < arr.GetLength(1); j++)
         {
-            int max = arr[i,j];
-            int min = arr[i,j];
-            if (arr[i,j] > max)
+            int temp = 0;
+            if (arr[i,j] < arr[i,j+1])
             {
-                
+                temp = arr[i,j];
+                arr[i,j] = arr[i,j+1];
+                arr[i,j+1] = temp;
             }
 
         }
+        }
+    return arr;
+}
+
+PrintArray(SortArray(betaArray));
+
+void PrintArray(int[,] arr)
+{
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            Console.Write($"{arr[i, j]} ");
+        }
         Console.Write("\n");
     }
-    return arr;
 }
