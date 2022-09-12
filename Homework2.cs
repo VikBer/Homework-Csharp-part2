@@ -1,60 +1,53 @@
 ﻿/*
-git checkout Lesson6task43 - Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-                                        заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
-                                        значения b1, k1, b2 и k2 задаются пользователем.
-
-b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
-
-k1 * x + b1 = k2 * x + b2
-k1 * x - k2 * x = b2 - b1
-x * (k1 - k2) = b2 - b1
+git checkout Lesson8task54 - Задача 54: Задайте двумерный массив. 
+                                Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+В итоге получается вот такой массив:
+7 4 2 1
+9 5 3 2
+8 4 4 2
 
  
 */
 
-Console.Clear();
+int[,] alphaArray = new int[new Random().Next(3, 6), new Random().Next(3, 6)];
 
-double[,] coefficients = new double[2, 2];
-double[] crossPoint = new double[2];
-
-void InputCoefficients()
+int[,] FillArray(int[,] arr)
 {
-  for (int i = 0; i < coefficients.GetLength(0); i++)
-  {
-    Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
-    for (int j = 0; j < coefficients.GetLength(1); j++)
+    for (int i = 0; i < arr.GetLength(0); i++)
     {
-      if(j==0) Console.Write($"Введите коэффициент k: ");
-      else Console.Write($"Введите коэффициент b: ");
-      coefficients[i,j] = Convert.ToInt32(Console.ReadLine());
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            arr[i, j] = new Random().Next(0, 10);
+            Console.Write($"{arr[i, j]} ");
+        }
+        Console.Write("\n");
     }
-  }
+    return arr;
 }
 
-double[] Decision(double[,] coeff)
+FillArray(alphaArray);
+
+Console.Write("\n");
+
+int[,] SortArray(int[,] arr)
 {
-  crossPoint[0] = (coeff[1,1] - coeff[0,1]) / (coeff[0,0] - coeff[1,0]);
-  crossPoint[1] = crossPoint[0] * coeff[0,0] + coeff[0,1];
-  return crossPoint;
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            int max = arr[i,j];
+            int min = arr[i,j];
+            if (arr[i,j] > max)
+            {
+                
+            }
+
+        }
+        Console.Write("\n");
+    }
+    return arr;
 }
-
-void OutputResponse(double[,] coeff)
-{
-  if (coeff[0,0] == coeff[1,0] && coeff[0,1] == coeff[1,1]) 
-  {
-    Console.Write($"\nПрямые совпадают");
-  }
-  else if (coeff[0,0] == coeff[1,0] && coeff[0,1] != coeff[1,1]) 
-  {
-    Console.Write($"\nПрямые параллельны");
-  }
-  else 
-  {
-    Decision(coeff);
-    Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
-  }
-}
-
-InputCoefficients();
-OutputResponse(coefficients);
-
