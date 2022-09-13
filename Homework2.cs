@@ -1,20 +1,22 @@
 ﻿/*
         8. Задачи восьмого (8) семинара:
 
-git checkout Lesson8task56 - Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, 
-                                        которая будет находить строку с наименьшей суммой элементов.
+Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+Например, даны 2 матрицы:
+2 4 | 3 4
+3 2 | 3 3
+Результирующая матрица будет:
+18 20
+15 18
 
-1 4 7 2
-5 9 2 3
-8 4 2 4
-5 2 6 7
-
-Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 */
 
 Console.Clear();
 
-int[,] arrayA = new int [4, 4];
+int possibilityOfMultiplying = new Random().Next(1,5); //во избежание нарушения правил размерности умножаемых матриц, создаю подходящий правилам размер
+int[,] matrixA = new int [ new Random().Next(1,5), possibilityOfMultiplying];
+int[,] matrixB = new int [possibilityOfMultiplying, new Random().Next(1,5)];
+int[,] resultMatrix = new int [matrixA.GetLength(0),matrixB.GetLength(1)];
 
 int[,] FillAndPrintArray(int[,] arr)
 {
@@ -29,26 +31,39 @@ int[,] FillAndPrintArray(int[,] arr)
     }
     return arr;
 }
-FillAndPrintArray(arrayA);
+Console.WriteLine("\nМатрица А");
+FillAndPrintArray(matrixA);
+Console.WriteLine("\nМатрица B");
+FillAndPrintArray(matrixB);
 
-int MinimalSummRow(int[,] arr)
+int[,] MultiplyMatrix (int[,] arrA, int[,] arrB)
 {
-        int sum = 0;
-        int tempSum = 0;
-        int count = 1;
-        int rowNumber = count;
-        
-    for (int i = 0; i < arr.GetLength(0); i++)
-    {
-        tempSum = 0;
-        for (int j = 0; j < arr.GetLength(1); j++)
+       int[,] arrResult = resultMatrix;
+       for (int i = 0; i < arrA.GetLength(0); i++)
+       {
+        for (int j = 0; j < arrB.GetLength(1); j++)
         {
-            tempSum += arr[i, j];
-            if (i == 0 && j == arr.GetLength(1)-1) {sum = tempSum;}
-        }
-        if (tempSum < sum) {sum = tempSum; rowNumber = count;}
-        count++;
-    }
-    return rowNumber;
+                for (int k = 0; k < arrB.GetLength(0); k++)
+                {
+                        arrResult[i,j] += arrA[i,k] * arrB[k,j];
+                }
+        }        
+       }
+
+       return arrResult;
+
 }
-Console.Write($"Строка с минимальной суммой элементов под номером {MinimalSummRow(arrayA)}");
+void Print(int[,] a)
+        {
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    Console.Write($"{a[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+Console.WriteLine("\nИтоговая матрица");
+Print(MultiplyMatrix(matrixA,matrixB));
