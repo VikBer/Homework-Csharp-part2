@@ -10,45 +10,43 @@
 
 Console.Clear();
 
-void Print (int[,] arr)
+void Print(int[,] arr)
 {
-        for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int j = 0; j < arr.GetLength(1); j++)
         {
-                for (int j = 0; j < arr.GetLength(1); j++)
-                {
-                        if (arr[i,j] < 10)
-                        Console.Write($"0{arr[i,j]} ");
-                        else Console.Write($"{arr[i,j]} ");
-                }
-        Console.Write("\n");             
+            if (arr[i, j] < 10)
+                Console.Write($"0{arr[i, j]} ");
+            else Console.Write($"{arr[i, j]} ");
         }
+        Console.Write("\n");
+    }
 }
 
 
 int[,] arrayA = new int[4, 4];
 
-
-
-int[,] Spiral (int[,] arr)
+int[,] Spiral(int[,] arr)
 {
-        int temp = 1;
-        int i = 0;
-        int j = 0;
+    int temp = 1;
+    int i = 0;
+    int j = 0;
 
-        while (temp <= arrayA.GetLength(0) * arrayA.GetLength(1))
-        {
+    while (temp <= arrayA.GetLength(0) * arrayA.GetLength(1))
+    {
         arrayA[i, j] = temp;
         temp++;
         if (i <= j + 1 && i + j < arrayA.GetLength(1) - 1)
-        j++;
+            j++;
         else if (i < j && i + j >= arrayA.GetLength(0) - 1)
-        i++;
+            i++;
         else if (i >= j && i + j > arrayA.GetLength(1) - 1)
-        j--;
+            j--;
         else
-        i--;
-        }
-        return arr;
+            i--;
+    }
+    return arr;
 }
 
 Print(Spiral(arrayA));
