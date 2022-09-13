@@ -25,7 +25,6 @@ int[,,] FillAndPrintArray(int[,,] arr)
                 arr[i, j, k] = new Random().Next(10, 100);
                 Console.Write($"{arr[i,j,k]} ({i},{j},{k})");
             }
-            Console.Write("\n");
         }
        Console.Write("\n");
     }
