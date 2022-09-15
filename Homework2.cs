@@ -1,40 +1,31 @@
 ﻿/*
         9. Задачи девятого (9) семинара:
 
-Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
-
-M = 1; N = 15 -> 120
-M = 4; N = 8. -> 30
+Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.
+m = 2, n = 3 -> A(m,n) = 9
+m = 3, n = 2 -> A(m,n) = 29
 
 */
 
 Console.Clear();
 
-Console.Write("Введите значение M: ");
+Console.Write("Введите неотрицательное значение m: ");
 int m = int.Parse(Console.ReadLine()!);
 
-Console.Write("Введите значение N: ");
+Console.Write("Введите неотрицательное значение N: ");
 int n = int.Parse(Console.ReadLine()!);
 
-void Recursion (int a, int b, int sum)
+int RecursionAkkerman (int n, int m)
 {
-        if (a <= 0 && b > 0) 
-                {Console.Write("Введено не натуральное число M");
-                return;}
-                
-        if (b <= 0 && a > 0) 
-                {Console.Write("Введено не натуральное число N");
-                return;}  
-        if (a <= 0 && b <= 0) 
-                {Console.Write("Введены не натуральные числа M,N");
-                return;}
-       
-        if (a > 0 && a <= b) 
-        {
-                sum += a++;
-                Recursion(a, b, sum);
-        }
-        else  Console.Write($"{sum} ");     
+    if (n == 0)
+        return m + 1;
+    else
+      if ((n != 0) && (m == 0))
+        return RecursionAkkerman(n - 1, 1);
+    else
+        return RecursionAkkerman(n - 1, RecursionAkkerman(n, m - 1));
+  
      
 }
-Recursion(m,n, 0);
+
+RecursionAkkerman(m,n);
