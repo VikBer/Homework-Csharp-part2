@@ -28,4 +28,4 @@ int RecursionAkkerman (int n, int m)
      
 }
 
-RecursionAkkerman(m,n);
+Console.Write($"\n{RecursionAkkerman(m,n)}");
