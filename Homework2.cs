@@ -10,25 +10,31 @@ M = 4; N = 8. -> 30
 
 Console.Clear();
 
-Console.WriteLine("Введите значение N");
+Console.Write("Введите значение M: ");
+int m = int.Parse(Console.ReadLine()!);
+
+Console.Write("Введите значение N: ");
 int n = int.Parse(Console.ReadLine()!);
 
-Console.WriteLine("Введите значение M");
-int M = int.Parse(Console.ReadLine()!);
-
-int Recursion (int a, int b)
+void Recursion (int a, int b, int sum)
 {
-        if (a <= 0 || b <= 0) 
-                {
-                Console.Write("Введено не натуральное число "); 
-                return r;
-                }
-        if (r > 1) 
+        if (a <= 0 && b > 0) 
+                {Console.Write("Введено не натуральное число M");
+                return;}
+                
+        if (b <= 0 && a > 0) 
+                {Console.Write("Введено не натуральное число N");
+                return;}  
+        if (a <= 0 && b <= 0) 
+                {Console.Write("Введены не натуральные числа M,N");
+                return;}
+       
+        if (a > 0 && a <= b) 
         {
-                Console.Write($"{r}, ");
-                return Recursion(r-1);
+                sum += a++;
+                Recursion(a, b, sum);
         }
-        return r;
+        else  Console.Write($"{sum} ");     
+     
 }
-
-Console.WriteLine(Recursion(n));
+Recursion(m,n, 0);
